@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>ETL（Extract Transform Load） | Lake&#39;s Notes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="IMP前綴的Table,功能是在資料轉換後真正要寫入主要紀錄的資料表之前,先記錄程式轉換後的原始資料,並將是否有正確存入主要資料表的狀態一併紀錄在這個table中 這種設計方法是 ETL 的其中一個橋段。 你主管所採用的設計模式可以與 暫存表（Staging Table）或日誌表（Logging Table）的概念相類似。在資料轉換和載入過程中，暫存表通常用於在資料進入主要表之前先保存原始資料，以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ETL（Extract Transform Load）">
+<meta property="og:url" content="https://lakeeeeee.github.io/2024/09/24/ETL%EF%BC%88Extract-Transform-Load%EF%BC%89/index.html">
+<meta property="og:site_name" content="Lake&#39;s Notes">
+<meta property="og:description" content="IMP前綴的Table,功能是在資料轉換後真正要寫入主要紀錄的資料表之前,先記錄程式轉換後的原始資料,並將是否有正確存入主要資料表的狀態一併紀錄在這個table中 這種設計方法是 ETL 的其中一個橋段。 你主管所採用的設計模式可以與 暫存表（Staging Table）或日誌表（Logging Table）的概念相類似。在資料轉換和載入過程中，暫存表通常用於在資料進入主要表之前先保存原始資料，以">
+<meta property="og:locale">
+<meta property="article:published_time" content="2024-09-24T13:23:18.000Z">
+<meta property="article:modified_time" content="2025-01-20T12:51:06.198Z">
+<meta property="article:author" content="Lake Chen">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Lake's Notes" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Lake&#39;s Notes</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Suche"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://Lakeeeeee.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-ETL（Extract-Transform-Load）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/09/24/ETL%EF%BC%88Extract-Transform-Load%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2024-09-24T13:23:18.000Z" itemprop="datePublished">2024-09-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      ETL（Extract Transform Load）
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>IMP前綴的Table,<br>功能是在資料轉換後真正要寫入主要紀錄的資料表之前,<br>先記錄程式轉換後的原始資料,<br>並將是否有正確存入主要資料表的狀態一併紀錄在這個table中</p>
+<p>這種設計方法是 ETL 的其中一個橋段。</p>
+<p>你主管所採用的設計模式可以與 暫存表（Staging Table）或日誌表（Logging Table）的概念相類似。在資料轉換和載入過程中，暫存表通常用於在資料進入主要表之前先保存原始資料，以便進行檢查、驗證或處理，確保數據準確無誤再插入到最終表。這種設計有時候也會用來追蹤載入過程中的錯誤或處理狀態。</p>
+<p>具體來說，這種設計可歸類為ETL（Extract, Transform, Load）流程的一部分，其中這個表被用來：</p>
+<p>暫存原始資料：保存原始數據狀態，方便後續驗證和比較。<br>紀錄載入狀態：追蹤資料轉換與插入過程中是否成功，類似日誌表的功能。<br>錯誤處理：當資料在轉換或載入過程中出現問題時，能夠保留問題數據進行後續處理。</p>
+<p>這種設計模式有助於提高數據處理的可靠性和可追溯性，通常也被稱為Audit Trail（審計追蹤），尤其是當表用來保存數據修改記錄和處理過程的成功或失敗狀態時。</p>
+<p>這類資料表的功能在ETL系統中相當常見，用於支援資料治理（Data Governance）、數據質量（Data Quality）以及日誌和監控。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lakeeeeee.github.io/2024/09/24/ETL%EF%BC%88Extract-Transform-Load%EF%BC%89/" data-id="cm653ph360000047kaak6da7d" data-title="ETL（Extract Transform Load）" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/01/20/hexo-%E7%AC%AC00%E5%A4%A9/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          hexo 第001天
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/01/20/hexo-%E7%AC%AC00%E5%A4%A9/">hexo 第001天</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/24/ETL%EF%BC%88Extract-Transform-Load%EF%BC%89/">ETL（Extract Transform Load）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 Lake Chen<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
