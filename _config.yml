@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: Lake's Notes
 subtitle: ''
-description: ''
+description: '紀錄一些工作上的筆記以及個人隨筆'
 keywords:
-author: John Doe
-language: en
-timezone: ''
+author: Lake Chen
+language: zh
+timezone: 'Asia/Taipei'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://Lakeeeeee.github.io
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -101,4 +101,7 @@ theme: landscape
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: git 
+  repo: https://github.com/Lakeeeeee/Lakeeeeee.github.io 
+  branch: main 
+  message: "Second Commit" # Commit 訊息
