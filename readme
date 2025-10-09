@@ -1,0 +1,12 @@
+建立 page / post：
+hexo new page "about"            # 建 page（會生成 source/about/index.md）
+hexo new "my-post"               # 建 post（_posts）
+
+本地預覽：
+hexo server                      # 或 hexo s -D
+
+產生靜態檔：
+hexo generate   # 或 hexo g
+
+部署（若用 hexo-deployer-git，設定好後）：
+hexo deploy    # 或 hexo d
