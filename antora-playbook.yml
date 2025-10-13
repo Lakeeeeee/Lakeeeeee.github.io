@@ -1,10 +1,10 @@
 site:
-  title: 範例 Antora 站
-  url: https://github.com/Lakeeeeee/Lakeeeeee.github.io.git
+  title: 範例 Antora 
+  url: 
 
 content:
   sources:
-    - url: ./
+    - url: .
       branches: HEAD
       start_path: docs
 
@@ -14,4 +14,4 @@ ui:
     snapshot: true
 
 output:
-  dir: build/site
+  dir: ./build/site

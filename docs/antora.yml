@@ -1,5 +1,6 @@
-name: lake-note
-version: 1.0
+
+name: Notes
+version: ~
 title: Notes
 nav:
   - modules/ROOT/nav.adoc
