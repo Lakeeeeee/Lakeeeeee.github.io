@@ -1,0 +1,4 @@
+= Welcome to My Product Docs
+:page-nav_order: 1
+
+This is your first Antora page. See <<getting-started>> to continue.
