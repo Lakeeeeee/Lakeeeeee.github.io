@@ -5,9 +5,9 @@ theme:
 
 nav:
   - 首頁: index.md
-  - 指南(MD): guide.md
-  - 範例(ADOC): test.adoc
-
+  - 文件: 
+    - 物件導向程式設計: work/oop.adoc
+    
 plugins:
   - search
   - asciidoctor_backend:          # 注意外掛 key 名稱
