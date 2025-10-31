@@ -5,7 +5,7 @@ theme:
 
 nav:
   - 首頁: index.adoc
-  - 文件: 
+  - 筆記: 
     - 物件導向程式設計: work/oop.adoc
 
 plugins:
