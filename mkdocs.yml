@@ -1,0 +1,21 @@
+site_name: My Docs
+site_url: https://Lakeeeeee.github.io/Lakeeeeee.github.io/
+theme:
+  name: material
+
+nav:
+  - 首頁: index.md
+  - 指南(MD): guide.md
+  - 範例(ADOC): sample.adoc
+
+plugins:
+  - search
+  - asciidoc:
+      backend: html5
+      attributes:
+        source-highlighter: rouge
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true

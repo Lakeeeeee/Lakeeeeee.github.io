@@ -1,4 +1,0 @@
-// 主導覽（範例）
-// 注意：xref 的路徑是相對於 modules/ROOT/pages 的路徑
-* xref:index.adoc[首頁]
-* xref:1007oop分享.adoc[首頁]
