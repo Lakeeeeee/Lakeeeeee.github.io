@@ -4,10 +4,10 @@ theme:
   name: material
 
 nav:
-  - 首頁: index.md
+  - 首頁: index.adoc
   - 文件: 
     - 物件導向程式設計: work/oop.adoc
-    
+
 plugins:
   - search
   - asciidoctor_backend:          # 注意外掛 key 名稱
