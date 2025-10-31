@@ -26,11 +26,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install mkdocs mkdocs-material
 
-      # - name: Install Asciidoctor (for .adoc)
-      #   run: |
-      #     sudo apt-get update
-      #     sudo apt-get install -y ruby-full
-      #     sudo gem install asciidoctor
+      - name: Install Asciidoctor (for .adoc)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ruby-full
+          sudo gem install asciidoctor
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
