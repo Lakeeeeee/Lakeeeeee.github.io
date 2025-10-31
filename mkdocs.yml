@@ -1,7 +1,7 @@
 site_name: My Docs
 site_url: https://lakeeeeee.github.io/
 theme:
-  name: mkdocs
+  name: material
 
 nav:
   - 首頁: index.md

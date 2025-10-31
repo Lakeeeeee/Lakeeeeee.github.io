@@ -1,7 +1,0 @@
-= Adoc Test
-
-* test
-* test
-
-. test
-. test
