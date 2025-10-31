@@ -10,9 +10,13 @@ nav:
 
 plugins:
   - search
-  - asciidoc:
-      backend: html5
-      attributes:
+  - asciidoctor_backend:          # 注意外掛 key 名稱
+      fail_on_error: false        # 有非致命錯誤時不擋 build（可改 true）
+      safe_mode: safe
+      attributes:                 # 可傳 Asciidoctor 屬性
+        imagesdir: images
+        sectanchors: true
+        sectlinks: true
         source-highlighter: rouge
 
 markdown_extensions:

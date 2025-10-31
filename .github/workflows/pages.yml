@@ -2,7 +2,7 @@ name: Build and Deploy MkDocs to GitHub Pages
 
 on:
   push:
-    branches: [ main ]   # 你的預設分支
+    branches: [ main ]
 
 permissions:
   contents: read
@@ -13,18 +13,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.x'
 
       - name: Install MkDocs & plugins
         run: |
           python -m pip install --upgrade pip
-          pip install mkdocs mkdocs-material
+          pip install mkdocs mkdocs-material "mkdocs-asciidoctor-backend>=0.1" --pre
 
       - name: Install Asciidoctor (for .adoc)
         run: |
@@ -32,14 +30,12 @@ jobs:
           sudo apt-get install -y ruby-full
           sudo gem install asciidoctor
 
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v5
 
       - name: Build site
         run: mkdocs build --strict --site-dir _site
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
 
@@ -50,6 +46,5 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
+      - id: deployment
         uses: actions/deploy-pages@v4
