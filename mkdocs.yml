@@ -1,7 +1,14 @@
-site_name: My Docs
+site_name: 躺平路上努力中
 site_url: https://lakeeeeee.github.io/
 theme:
   name: material
+  palette:
+  - scheme: default      # 淺色模式
+    primary: grey      # 主色
+    accent: teal         # 強調色
+  # - scheme: slate        # 深色模式
+  #   primary: indigo
+  #   accent: pink
 
 nav:
   - 首頁: index.adoc
