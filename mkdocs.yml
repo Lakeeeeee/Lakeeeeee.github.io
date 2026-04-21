@@ -1,18 +1,19 @@
-site_name: 躺平路上努力中
+﻿site_name: 避邪葫蘆
 site_url: https://lakeeeeee.github.io/
 theme:
   name: material
+  custom_dir: overrides
   palette:
   - scheme: default      # 淺色模式
-    primary: grey      # 主色
+    primary: grey        # 主色
     accent: teal         # 強調色
-  # - scheme: slate        # 深色模式
+  # - scheme: slate      # 深色模式
   #   primary: indigo
   #   accent: pink
 
 nav:
   - 首頁: index.adoc
-  - 日記: 
+  - 日記:
     - 新春雜筆: diary/20260223.adoc
     - 腦袋裡的水泥一直沒乾: diary/20260420.adoc
     # - 物件導向程式設計: work/oop.adoc
@@ -33,3 +34,9 @@ markdown_extensions:
   - admonition
   - toc:
       permalink: true
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/extra.js
