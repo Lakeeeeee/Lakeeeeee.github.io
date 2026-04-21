@@ -13,7 +13,7 @@ theme:
 
 nav:
   - 日記:
-    - 2026: 
+    - 二零二六: 
       - diary/20260223.adoc
       - diary/20260420.adoc
       # - 物件導向程式設計: work/oop.adoc
