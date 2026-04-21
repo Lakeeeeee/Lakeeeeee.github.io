@@ -1,4 +1,4 @@
-name: Build and Deploy MkDocs to GitHub Pages
+﻿name: Build and Deploy MkDocs to GitHub Pages
 
 on:
   push:
@@ -15,9 +15,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.x'
+
+      - name: Prepare generated MkDocs config
+        run: node scripts/prepare-mkdocs-config.mjs
 
       - name: Install MkDocs & plugins
         run: |
@@ -33,7 +40,7 @@ jobs:
       - uses: actions/configure-pages@v5
 
       - name: Build site
-        run: mkdocs build --strict --site-dir _site
+        run: mkdocs build --strict --site-dir _site -f mkdocs.generated.yml
 
       - uses: actions/upload-pages-artifact@v3
         with:
