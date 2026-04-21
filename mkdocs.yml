@@ -24,6 +24,7 @@ plugins:
       fail_on_error: false        # 有非致命錯誤時不擋 build（可改 true）
       safe_mode: safe
       attributes:                 # 可傳 Asciidoctor 屬性
+        showtitle: true
         imagesdir: images
         sectanchors: true
         sectlinks: true
@@ -39,3 +40,4 @@ extra_css:
 
 extra_javascript:
   - javascripts/extra.js
+
