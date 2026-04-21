@@ -1,5 +1,21 @@
 ﻿{% extends "base.html" %}
 
 {% block content %}
-  {% include "partials/content-adoc-title.html" %}
+  <div class="custom-page-shell md-content__inner md-typeset">
+    {% include "partials/page-title.html" %}
+
+    <div class="page-body">
+      {% if "material/tags" in config.plugins and tags %}
+        {% include "partials/tags.html" %}
+      {% endif %}
+      {% include "partials/actions.html" ignore missing %}
+      {% include "partials/page-body.html" %}
+    </div>
+
+    <footer class="page-footer-block">
+      {% include "partials/source-file.html" ignore missing %}
+      {% include "partials/feedback.html" ignore missing %}
+      {% include "partials/comments.html" ignore missing %}
+    </footer>
+  </div>
 {% endblock %}

@@ -1,0 +1,12 @@
+﻿{% if "<h1" in page.content and "</h1>" in page.content %}
+  {% set before_h1 = page.content.split("<h1", 1)[0] %}
+  {% set h1_and_rest = "<h1" ~ page.content.split("<h1", 1)[1] %}
+  {% set content_after_h1 = h1_and_rest.split("</h1>", 1) %}
+  {% if content_after_h1|length > 1 %}
+    {{ (before_h1 ~ content_after_h1[1]) | safe }}
+  {% else %}
+    {{ page.content }}
+  {% endif %}
+{% else %}
+  {{ page.content }}
+{% endif %}

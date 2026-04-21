@@ -1,0 +1,9 @@
+﻿{% if "<h1" in page.content and "</h1>" in page.content %}
+  {% set h1_parts = page.content.split("<h1", 1) %}
+  {% if h1_parts|length > 1 %}
+    {% set h1_block = ("<h1" ~ h1_parts[1]).split("</h1>", 1)[0] ~ "</h1>" %}
+    <header class="page-title-block">
+      {{ h1_block | safe }}
+    </header>
+  {% endif %}
+{% endif %}
