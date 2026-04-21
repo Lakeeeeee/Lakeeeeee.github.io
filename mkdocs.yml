@@ -12,10 +12,9 @@ theme:
   #   accent: pink
 
 nav:
-  - 首頁: index.adoc
   - 日記:
-    - 新春雜筆: diary/20260223.adoc
-    - 腦袋裡的水泥一直沒乾: diary/20260420.adoc
+    - diary/20260223.adoc
+    - diary/20260420.adoc
     # - 物件導向程式設計: work/oop.adoc
     # - ISO27001的「照」到底可以幹嘛: work/iso.adoc
 
